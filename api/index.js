@@ -19,10 +19,5 @@ app.all("*", (_, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Express Server listening on port ${port}`);
-})
-
 module.exports = app;
 
