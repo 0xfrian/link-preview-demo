@@ -17,7 +17,6 @@
     "link-preview-js": "^3.0.4",
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
-    "pdfjs-dist": "^2.16.105",
     "puppeteer": "^18.0.5"
   }
 }
