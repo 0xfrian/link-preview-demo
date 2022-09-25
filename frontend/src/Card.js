@@ -1,4 +1,4 @@
-import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { TwitterTweetEmbed, TwitterTimelineEmbed } from 'react-twitter-embed';
 import {decode} from 'html-entities';
 
 function adjust_description(description) {
@@ -21,15 +21,14 @@ export default function Card({ article }) {
                 <a className="card-a-wrapper" href={article.url} draggable="false">
                     <div className="group">
                         <div className="thumbnail-container">
-                            <img alt="thumbnail" className="thumbnail pdf" src={article.thumbnail} draggable="false" loading="lazy" />
+                            <img alt="thumbnail" className="thumbnail" src={article.thumbnail} draggable="false" loading="lazy" />
                         </div>
                         <h3 className="title no-select" draggable="false">
                             {article.title}
                         </h3>
                         <p className="description">
                             {adjust_description(article.description)}
-                        </p>
-                    </div>
+                        </p>                    </div>
                     <div className="tail-container">
                         <p className="category">
                             {article.category}
@@ -55,7 +54,7 @@ export default function Card({ article }) {
                             className="card no-select" 
                             draggable="false"
                         >
-                            <div class="lds-ellipsis">
+                            <div className="lds-ellipsis">
                                 <div></div>
                                 <div></div>
                                 <div></div>
@@ -68,9 +67,39 @@ export default function Card({ article }) {
                         omit_script: true,
                         theme: "dark",
                         limit: 1,
-                        maxwidth: 400,
+                        maxwidth: 350,
                         hide_media: true,
                         hide_thread: true,
+                        dnt: true,
+                    }}
+                />
+            </div>
+        );
+    } else if (article.type === "timeline") {
+        return (
+            <div className="tweet-container no-select" draggable="false">
+                <TwitterTimelineEmbed 
+                    placeholder={
+                        <div 
+                            className="card no-select" 
+                            draggable="false"
+                        >
+                            <div className="lds-ellipsis">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    }
+                    sourceType="profile" 
+                    screenName={article.tweet_profile}
+                    options = {{
+                        omit_script: true,
+                        theme: "dark",
+                        limit: 1,
+                        maxwidth: 350,
+                        maxheight: 500,
                         dnt: true,
                     }}
                 />
