@@ -30,8 +30,8 @@ function App() {
                 </span>, 
                 <span key={uuid()}></span>,
             ]);
-            // const API_URL_BASE = "/api";
-            const API_URL_BASE = "http://localhost:3000/api";
+            const API_URL_BASE = "/api";
+            // const API_URL_BASE = "http://localhost:3000/api";
             const start_time = performance.now();
             console.log("Start time: ", start_time);
             let end_time = 0;
