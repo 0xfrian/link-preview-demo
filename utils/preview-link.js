@@ -93,10 +93,12 @@ async function previewLink(article_url, parsed=true) {
                     && link_preview.images.length > 0) {
                     // Select the first image as our thumbnail 
                     link_preview_parsed.thumbnail = link_preview.images[0];
-                } else if (link_preview.hasOwnProperty("favicons") 
-                    // If no images exist, then use the favicon
-                    && link_preview.favicons.length > 0) {
-                    link_preview_parsed.thumbnail = link_preview.favicons[0];
+                // } else if (link_preview.hasOwnProperty("favicons") 
+                //     // If no images exist, then use the favicon
+                //     && link_preview.favicons.length > 0) {
+                //     link_preview_parsed.thumbnail = link_preview.favicons[0];
+                } else {
+                    link_preview_parsed.thumbnail = "N/A";
                 }
 
                 link_preview = link_preview_parsed;
@@ -129,6 +131,11 @@ async function previewLink(article_url, parsed=true) {
             const url = new URL(article_url);
             const domain = url.hostname.replace("www.", "").replace(".com", "");
             link_preview.domain = domain;
+        }
+
+        // If URL leads to a PDF, then set thumbnail to generic PDF icon
+        if (link_preview.thumbnail == "N/A" && article_url.slice(-3).includes("pdf")) {
+            link_preview.thumbnail = "https://i.imgur.com/CbXg5hI.png";
         }
     
         // If link preview succeeds, then break out of while-loop
