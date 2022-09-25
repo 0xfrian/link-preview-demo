@@ -15,51 +15,13 @@ function adjust_description(description) {
 }
 
 export default function Card({ article }) {
-    if (article.type === "pdf") {
+    if (article.type === "article" || article.type === "pdf") {
         return (
             <article className="card no-select">
-                <a href={article.url} draggable="false">
+                <a className="card-a-wrapper" href={article.url} draggable="false">
                     <div className="group">
-                        <div className="caption-container">
-                            <p className="caption">
-                                {article.caption}
-                            </p>
-                        </div>
                         <div className="thumbnail-container">
-                                <img alt="thumbnail" className="thumbnail pdf" src={article.thumbnail} draggable="false" loading="lazy" />
-                        </div>
-                        <h3 style={{marginBottom: "5px"}} className="title">
-                            {article.title}
-                        </h3>
-                    </div>
-                    <div className="group">
-                        <div className="tail-container">
-                            <p className="category">
-                                {article.category}
-                            </p>
-                            <div className="source-date-container">
-                                <p className="source">
-                                    {article.author}
-                                </p>
-                                <p className="date">
-                                    {article.date}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </article>
-        );
-    } else if (article.type === "article"){
-        return (
-            <article className="card no-select">
-                <a href={article.url} draggable="false">
-                    <div className="group">
-                        <p className="caption">
-                            {article.caption}
-                        </p>
-                        <div className="thumbnail-container">
-                            <img alt="thumbnail" className="thumbnail" src={article.thumbnail} draggable="false" loading="lazy" />
+                            <img alt="thumbnail" className="thumbnail pdf" src={article.thumbnail} draggable="false" loading="lazy" />
                         </div>
                         <h3 className="title no-select" draggable="false">
                             {article.title}
@@ -85,18 +47,20 @@ export default function Card({ article }) {
             </article>
         )
     } else if (article.type === "tweet") {
-        const loading_snippet = 
-            '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div><div class="thumbnail-container"><img alt="thumbnail" class="thumbnail" src="https://wallpaperaccess.com/full/4719129.png"></div><h3 class="title">Rendering Tweet . . . </h3>';
-        const html_snippet = loading_snippet + article.snippet;
         return (
             <div className="tweet-container no-select" draggable="false">
                 <TwitterTweetEmbed 
                     placeholder={
                         <div 
-                            className="tweet-placeholder no-select" 
+                            className="card no-select" 
                             draggable="false"
-                            dangerouslySetInnerHTML = {{ __html: html_snippet }}
                         >
+                            <div class="lds-ellipsis">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </div>
                     }
                     tweetId={article.tweet_id} 
