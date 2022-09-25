@@ -17,6 +17,10 @@ html {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 .row {
     display: flex;
     flex-direction: row; 
