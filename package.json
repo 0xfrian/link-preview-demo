@@ -12,12 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.27.2",
-    "canvas": "^2.10.1",
+    "canvas": "^2.6.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "link-preview-js": "^3.0.4",
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
-    "pdfjs-dist": "^2.16.105"
+    "pdfjs-dist": "^2.16.105",
+    "puppeteer": "^18.0.5"
   }
 }
