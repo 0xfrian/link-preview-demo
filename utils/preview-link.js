@@ -1,5 +1,38 @@
 // Import link-preview-js package
+const puppeteer = require("puppeteer");
 const { getLinkPreview } = require("link-preview-js");
+
+async function parse_website(article_url) {
+    let data = {};
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(article_url);
+
+        data = await page.evaluate(() => {
+            let title = document.querySelector("title").textContent;
+            let text_content =  Array.from(
+                            document.querySelectorAll("p"), 
+                            item => item.textContent.trim());
+
+            let data = {
+                title           : title,
+                text_content    : text_content,
+            };
+
+            return data;
+        });
+
+        await browser.close();
+    } catch (error) {
+        data = { 
+            title           : "N/A",
+            text_content    : "N/A",
+        };
+    }
+
+    return data;
+}
 
 // Generate link preview for a given URL
 async function previewLink(article_url, parsed=true) {
@@ -82,7 +115,16 @@ async function previewLink(article_url, parsed=true) {
 
         tries++;
 
-        // If link preview fails, then scrape domain using built-in URL API
+
+        // If link preview fails, then scrape title and
+        // domain fields, using puppeteer and URL API
+        if (link_preview.title == "N/A") {
+            const data = await parse_website(article_url);
+
+            if (data) {
+                link_preview.title = data.title;
+            }
+        }
         if (link_preview.domain == "N/A") {
             const url = new URL(article_url);
             const domain = url.hostname.replace("www.", "").replace(".com", "");

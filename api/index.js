@@ -25,7 +25,7 @@ app.post("/api/fetch-metadata", async (req, res) => {
         if (article_url.includes("https://twitter.com")) {
             article_metadata = await embedTweet(article_url);
             article_metadata.type = "tweet";
-        } else if (article_url.includes("pdf")) {
+        } else if (article_url.slice(-3).includes("pdf")) {
             article_metadata = await previewPDF(article_url);
             article_metadata.type = "pdf";
         } else {

@@ -33,7 +33,6 @@ function App() {
             const API_URL_BASE = "/api";
             // const API_URL_BASE = "http://localhost:3000/api";
             const start_time = performance.now();
-            console.log("Start time: ", start_time);
             let end_time = 0;
             let index = 0;
             axios.post(`${API_URL_BASE}/fetch-metadata`, { article_url : article_url })

@@ -26,7 +26,7 @@ export default function Card({ article }) {
                             </p>
                         </div>
                         <div className="thumbnail-container">
-                                <img alt="thumbnail" className="thumbnail" src={`data:image/jpeg;charset=utf-8;base64, ${article.thumbnail}`} draggable="false" loading="lazy" />
+                                <img alt="thumbnail" className="thumbnail pdf" src={article.thumbnail} draggable="false" loading="lazy" />
                         </div>
                         <h3 style={{marginBottom: "5px"}} className="title">
                             {article.title}
@@ -49,34 +49,6 @@ export default function Card({ article }) {
                     </div>
                 </a>
             </article>
-        );
-    } else if (article.type === "tweet") {
-        const loading_snippet = 
-            '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div><div class="thumbnail-container"><img alt="thumbnail" class="thumbnail" src="https://wallpaperaccess.com/full/4719129.png"></div><h3 class="title">Rendering Tweet . . . </h3>';
-        const html_snippet = loading_snippet + article.snippet;
-        return (
-            <div className="tweet-container no-select" draggable="false">
-                <TwitterTweetEmbed 
-                    placeholder={
-                        <div 
-                            className="tweet-placeholder no-select" 
-                            draggable="false"
-                            dangerouslySetInnerHTML = {{ __html: html_snippet }}
-                        >
-                        </div>
-                    }
-                    tweetId={article.tweet_id} 
-                    options = {{
-                        omit_script: true,
-                        theme: "dark",
-                        limit: 1,
-                        maxwidth: 400,
-                        hide_media: true,
-                        hide_thread: true,
-                        dnt: true,
-                    }}
-                />
-            </div>
         );
     } else if (article.type === "article"){
         return (
@@ -112,6 +84,34 @@ export default function Card({ article }) {
                 </a>
             </article>
         )
+    } else if (article.type === "tweet") {
+        const loading_snippet = 
+            '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div><div class="thumbnail-container"><img alt="thumbnail" class="thumbnail" src="https://wallpaperaccess.com/full/4719129.png"></div><h3 class="title">Rendering Tweet . . . </h3>';
+        const html_snippet = loading_snippet + article.snippet;
+        return (
+            <div className="tweet-container no-select" draggable="false">
+                <TwitterTweetEmbed 
+                    placeholder={
+                        <div 
+                            className="tweet-placeholder no-select" 
+                            draggable="false"
+                            dangerouslySetInnerHTML = {{ __html: html_snippet }}
+                        >
+                        </div>
+                    }
+                    tweetId={article.tweet_id} 
+                    options = {{
+                        omit_script: true,
+                        theme: "dark",
+                        limit: 1,
+                        maxwidth: 400,
+                        hide_media: true,
+                        hide_thread: true,
+                        dnt: true,
+                    }}
+                />
+            </div>
+        );
     }
 }
 
