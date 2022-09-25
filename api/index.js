@@ -2,7 +2,7 @@ const path = require("path");
 const cors = require("cors");
 const express = require("express");
 
-const { previewLink } = require("../utils/link-preview.js");
+const { previewLink } = require("../utils/preview-link.js");
 const { previewPDF }= require("../utils/preview-pdf.js");
 const { embedTweet }= require("../utils/embed-tweet.js");
 const { getTodaysDate } = require("../utils/helper/get-date.js");
