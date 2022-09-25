@@ -3,7 +3,6 @@ const cors = require("cors");
 const express = require("express");
 
 const { previewLink } = require("../utils/preview-link.js");
-const { previewPDF }= require("../utils/preview-pdf.js");
 const { embedTweet }= require("../utils/embed-tweet.js");
 const { getTodaysDate } = require("../utils/helper/get-date.js");
 
@@ -25,9 +24,6 @@ app.post("/api/fetch-metadata", async (req, res) => {
         if (article_url.includes("https://twitter.com")) {
             article_metadata = await embedTweet(article_url);
             article_metadata.type = "tweet";
-        } else if (article_url.slice(-3).includes("pdf")) {
-            article_metadata = await previewPDF(article_url);
-            article_metadata.type = "pdf";
         } else {
             article_metadata = await previewLink(article_url, parsed=true);
             article_metadata.type = "article";
